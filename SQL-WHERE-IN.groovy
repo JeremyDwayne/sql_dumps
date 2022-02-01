@@ -7,7 +7,6 @@ begin = true
 def record(columns, dataRow) {
 
     if (begin) {
-        OUT.append("WHERE ")
         columns.eachWithIndex { column, idx ->
             OUT.append(column.name()).append(" IN (").append(NEWLINE)
         }
@@ -16,6 +15,7 @@ def record(columns, dataRow) {
     else {
         OUT.append(",").append(NEWLINE)
     }
+    OUT.append("    ")
 
     columns.eachWithIndex { column, idx ->
         def skipQuote = dataRow.value(column).toString().isNumber() || dataRow.value(column) == null
